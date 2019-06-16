@@ -1,8 +1,15 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # coding=UTF-8
 """
 Decoding 0x0. protocols
 """
+
+__author__ = "Sebastian Sjoholm"
+__copyright__ = "Copyright 2012-2014, Sebastian Sjoholm"
+__license__ = "GPL"
+__version__ = "2.0.0"
+__maintainer__ = "Nicolas Béguier"
+__date__ = "$Date: 2019-06-12 08:05:33 +0100 (Thu, 12 Jun 2019) $"
 
 # Standard library
 from string import whitespace
@@ -54,7 +61,10 @@ def decode_0x01(message):
         result.append({'key': 'Response on command', 'value': 'Invalid'})
 
     # MSG 1
-    result.append({'key': 'Transceiver type', 'value': RFX.rfx_subtype_01_msg1[data['msg1']]})
+    try:
+        result.append({'key': 'Transceiver type', 'value': RFX.rfx_subtype_01_msg1[data['msg1']]})
+    except KeyError:
+        result.append({'key': 'Transceiver type', 'value': 'Invalid'})
 
     # MSG 2
     result.append({'key': 'Firmware version', 'value': int(data['msg2'], 16)})
