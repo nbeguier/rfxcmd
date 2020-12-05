@@ -69,7 +69,7 @@ def dec2bin(x, width=8):
 	http://stackoverflow.com/questions/187273/base-2-binary-representation-using-python
 	Brian (http://stackoverflow.com/users/9493/brian)
 	"""
-	return ''.join(str((x>>i)&1) for i in xrange(width-1,-1,-1))
+	return ''.join(str((x>>i)&1) for i in range(width-1,-1,-1))
 
 # ----------------------------------------------------------------------------
 
