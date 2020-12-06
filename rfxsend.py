@@ -1,38 +1,22 @@
 #!/usr/bin/env python3
 # coding=UTF-8
+"""
+RFXSEND.PY
 
-# ------------------------------------------------------------------------------
-#    
-#    RFXSEND.PY
-#    
-#    Copyright (C) 2012-2013 Sebastian Sjoholm, sebastian.sjoholm@gmail.com
-#    
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#    
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#    
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#    
-#    Website: http://code.google.com/p/rfxcmd/
+Based on Sebastian Sjoholm work https://github.com/ssjoholm/rfxcmd_gc
+Copyright 2012-2014 Sebastian Sjoholm, sebastian.sjoholm@gmail.com
+Licensed under the GNU General Public License, Version 3.0
+Copyright 2018-2020 by Nicolas BEGUIER, nicolas_beguier@hotmail.com
+
 #
-#    $Rev: 566 $
-#    $Date: 2013-11-22 21:43:41 +0100 (Fri, 22 Nov 2013) $
+#   NOTES
 #
-#    NOTES
-#    
-#    RFXCOM is a Trademark of RFSmartLink.
+#   RFXCOM is a Trademark of RFSmartLink.
 #
 # ------------------------------------------------------------------------------
 #
-#                          Protocol License Agreement                      
-#                                                                    
+#                          Protocol License Agreement
+#
 # The RFXtrx protocols are owned by RFXCOM, and are protected under applicable
 # copyright laws.
 #
@@ -40,19 +24,20 @@
 # It is only allowed to use this protocol or any part of it for RFXCOM products
 # ==============================================================================
 #
-# The above Protocol License Agreement and the permission notice shall be 
+# The above Protocol License Agreement and the permission notice shall be
 # included in all software using the RFXtrx protocols.
 #
-# Any use in violation of the foregoing restrictions may subject the user to 
-# criminal sanctions under applicable laws, as well as to civil liability for 
+# Any use in violation of the foregoing restrictions may subject the user to
+# criminal sanctions under applicable laws, as well as to civil liability for
 # the breach of the terms and conditions of this license.
 #
 # ------------------------------------------------------------------------------
+"""
 
 __author__ = "Sebastian Sjoholm"
 __copyright__ = "Copyright 2012-2013, Sebastian Sjoholm"
 __license__ = "GPL"
-__version__ = "2.0.0"
+__version__ = "2.0.1"
 __maintainer__ = "Nicolas Béguier"
 __date__ = "$Date: 2019-06-12 08:05:33 +0100 (Thu, 12 Jun 2019) $"
 

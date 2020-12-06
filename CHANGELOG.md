@@ -1,6 +1,20 @@
 CHANGELOG
 =========
 
+2.0.1
+-----
+
+2020/12/06
+
+### Updates
+  - LICENSE
+
+### Bug Fixes
+  - xrange -> range
+  - uninitilize params
+  - Travis CI
+
+
 2.0.0
 -----
 
