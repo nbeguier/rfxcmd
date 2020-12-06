@@ -235,7 +235,7 @@ def shutdown():
     log_me("debug", "Exit 0")
     sys.stdout.flush()
     # pylint: disable=protected-access
-    sys.exit(0)
+    os._exit(0)
 
 # pylint: disable=unused-argument
 def handler(signum=None, frame=None):
@@ -326,18 +326,22 @@ def decode_packet(message):
     packettype = ByteToHex(message[1])
     log_me("debug", "PacketType: %s" % str(packettype))
 
+    subtype = None
     if len(message) > 2:
         subtype = ByteToHex(message[2])
         log_me("debug", "SubType: %s" % str(subtype))
 
+    seqnbr = None
     if len(message) > 3:
         seqnbr = ByteToHex(message[3])
         log_me("debug", "SeqNbr: %s" % str(seqnbr))
 
+    id1 = None
     if len(message) > 4:
         id1 = ByteToHex(message[4])
         log_me("debug", "Id1: %s" % str(id1))
 
+    id2 = None
     if len(message) > 5:
         id2 = ByteToHex(message[5])
         log_me("debug", "Id2: %s" % str(id2))
