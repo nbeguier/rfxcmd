@@ -255,7 +255,7 @@ def daemonize():
         if pid != 0:
             sys.exit(0)
     except OSError as err:
-        raise RuntimeError("1st fork failed: %s [%d]" % (err.strerror, err.errno))
+        raise RuntimeError("1st fork failed: %s [%d]" % (err.strerror, err.errno)) from err
 
     os.setsid()
 
@@ -267,7 +267,7 @@ def daemonize():
         if pid != 0:
             sys.exit(0)
     except OSError as err:
-        raise RuntimeError("2nd fork failed: %s [%d]" % (err.strerror, err.errno))
+        raise RuntimeError("2nd fork failed: %s [%d]" % (err.strerror, err.errno)) from err
 
     if CMDARG.createpid:
         pid = str(os.getpid())
@@ -1718,7 +1718,8 @@ if __name__ == "__main__":
             except IOError as err:
                 log_me("error", "Line: " + _line())
                 log_me("error", "Unable to write PID file: %s [%d]" % (err.strerror, err.errno))
-                raise SystemExit("Unable to write PID file: %s [%d]" % (err.strerror, err.errno))
+                raise SystemExit("Unable to write PID file: %s [%d]" % (err.strerror, err.errno)) \
+                    from err
 
             log_me("debug", "Deactivate screen printouts")
             CMDARG.printout_complete = False
