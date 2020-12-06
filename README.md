@@ -1,6 +1,6 @@
 # rfxcmd
 
-[![Build Status](https://travis-ci.org/nbeguier/rfxcmd.svg?branch=master)](https://travis-ci.org/nbeguier/rfxcmd) [![Python 3.4|3.7](https://img.shields.io/badge/python-3.4|3.7-green.svg)](https://www.python.org/) [![License](https://img.shields.io/badge/Licence-GPLv3-blue.svg)](https://github.com/nbeguier/rfxcmd/blob/master/doc/COPYING)
+[![Build Status](https://travis-ci.org/nbeguier/rfxcmd.svg?branch=master)](https://travis-ci.org/nbeguier/rfxcmd) [![Python 3.4|3.9](https://img.shields.io/badge/python-3.4|3.9-green.svg)](https://www.python.org/) [![License](https://img.shields.io/badge/Licence-GPLv3-blue.svg)](https://github.com/nbeguier/rfxcmd/blob/master/doc/COPYING)
 
 DESCRIPTION
 
@@ -12,7 +12,8 @@ REQUIREMENTS
 
 - Python 3.x
 - Tested on Raspberry Pi (Debian Jessie 8.11) with Python 3.4
-- Tested on Mac OSX 10.8.2 with Python 3.7
+- Tested on Raspberry Pi (Debian Buster 10.4) with Python 3.7
+- Tested on Mac OSX 19.6.0 with Python 3.9
 - Tested with RFXCOM device RFXtrx433-USB (v2.1)
 
 ```bash

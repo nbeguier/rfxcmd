@@ -253,9 +253,9 @@ def daemonize():
     try:
         pid = os.fork()
         if pid != 0:
-            exit(0)
+            sys.exit(0)
     except OSError as err:
-        raise RuntimeError("1st fork failed: %s [%d]" % (err.strerror, err.errno))
+        raise RuntimeError("1st fork failed: %s [%d]" % (err.strerror, err.errno)) from err
 
     os.setsid()
 
@@ -265,9 +265,9 @@ def daemonize():
     try:
         pid = os.fork()
         if pid != 0:
-            exit(0)
+            sys.exit(0)
     except OSError as err:
-        raise RuntimeError("2nd fork failed: %s [%d]" % (err.strerror, err.errno))
+        raise RuntimeError("2nd fork failed: %s [%d]" % (err.strerror, err.errno)) from err
 
     if CMDARG.createpid:
         pid = str(os.getpid())
@@ -326,18 +326,22 @@ def decode_packet(message):
     packettype = ByteToHex(message[1])
     log_me("debug", "PacketType: %s" % str(packettype))
 
+    subtype = None
     if len(message) > 2:
         subtype = ByteToHex(message[2])
         log_me("debug", "SubType: %s" % str(subtype))
 
+    seqnbr = None
     if len(message) > 3:
         seqnbr = ByteToHex(message[3])
         log_me("debug", "SeqNbr: %s" % str(seqnbr))
 
+    id1 = None
     if len(message) > 4:
         id1 = ByteToHex(message[4])
         log_me("debug", "Id1: %s" % str(id1))
 
+    id2 = None
     if len(message) > 5:
         id2 = ByteToHex(message[5])
         log_me("debug", "Id2: %s" % str(id2))
@@ -1027,7 +1031,7 @@ def read_whitelistfile():
     except Exception as err:
         log_me("error", "Error in " + CONFIG.whitelist_file + " file")
         log_me("error", err)
-        exit(1)
+        sys.exit(1)
 
     WHITELIST.data = xmldoc.documentElement.getElementsByTagName('sensor')
 
@@ -1044,7 +1048,7 @@ def print_version():
     log_me("info", "RFXCMD Version: " + __version__)
     log_me("info", __date__.replace('$', ''))
     log_me("debug", "Exit 0")
-    exit(0)
+    sys.exit(0)
 
 # ----------------------------------------------------------------------------
 
@@ -1054,7 +1058,7 @@ def check_pythonversion():
     """
     if sys.hexversion < 0x02060000:
         log_me("error", "Your Python need to be 2.6 or newer, please upgrade.")
-        exit(1)
+        sys.exit(1)
 
 # ----------------------------------------------------------------------------
 
@@ -1073,7 +1077,7 @@ def option_simulate(indata):
     except TypeError as err:
         log_me("error", "the input data is not valid. Line: " + _line())
         log_me("error", err)
-        exit(1)
+        sys.exit(1)
 
     timestamp = strftime('%Y-%m-%d %H:%M:%S')
 
@@ -1093,7 +1097,7 @@ def option_simulate(indata):
             log_me("info", "Sensor not included in whitelist")
             log_me("debug", "No match in whitelist")
             log_me("debug", "Exit 0")
-            exit(0)
+            sys.exit(0)
 
     # Printout
     log_me("info", "------------------------------------------------")
@@ -1106,17 +1110,17 @@ def option_simulate(indata):
     except ValueError as err:
         log_me("error", "the input data is invalid hex value. Line: " + _line())
         log_me("error", err)
-        exit(1)
+        sys.exit(1)
 
     # Decode it
     try:
         decode_packet(message)
     except KeyError:
         log_me("error", "unrecognizable packet (" + ByteToHex(message) + ") Line: " + _line())
-        exit(1)
+        sys.exit(1)
 
     log_me("debug", 'Exit 0')
-    exit(0)
+    sys.exit(0)
 
 # ----------------------------------------------------------------------------
 
@@ -1137,7 +1141,7 @@ def option_listen():
             log_me("error", "Error starting socket server. Line: " + _line())
             log_me("error", "can not start server socket, another instance already running?")
             log_me("error", err)
-            exit(1)
+            sys.exit(1)
         if serversocket.net_adapter_registered:
             log_me("debug", "Socket interface started")
         else:
@@ -1255,18 +1259,18 @@ def option_send():
         int(CMDARG.rawcmd, 16)
     except ValueError:
         log_me("error", "invalid rawcmd, not hex format")
-        exit(1)
+        sys.exit(1)
 
     # Check that first byte is not 00
     if ByteToHex(codecs_decode(CMDARG.rawcmd, "hex")[0]) == "00":
         log_me("error", "invalid rawcmd, first byte is zero")
-        exit(1)
+        sys.exit(1)
 
     # Check if string is the length that it reports to be
     cmd_len = int(ByteToHex(codecs_decode(CMDARG.rawcmd, "hex")[0]), 16)
     if not len(codecs_decode(CMDARG.rawcmd, "hex")) == (cmd_len + 1):
         log_me("error", "invalid rawcmd, invalid length")
-        exit(1)
+        sys.exit(1)
 
     # Flush buffer
     log_me("debug", "Serialport flush output")
@@ -1383,14 +1387,14 @@ def open_serialport():
     except Exception as err:
         log_me("error", "You need to install Serial extension for Python")
         log_me("error", err)
-        exit(1)
+        sys.exit(1)
 
     # Check for serial device
     if CONFIG.device:
         log_me("debug", "Device: " + CONFIG.device)
     else:
         log_me("error", "Device name missing. Line: " + _line())
-        exit(1)
+        sys.exit(1)
 
     # Open serial port
     log_me("debug", "Open Serialport")
@@ -1401,7 +1405,7 @@ def open_serialport():
     except SerialException as err:
         log_me("error", "Failed to connect on device " + CONFIG.device + " Line: " + _line())
         log_me("error", err)
-        exit(1)
+        sys.exit(1)
 
     if not SERIAL_PARAM.port.isOpen():
         SERIAL_PARAM.port.open()
@@ -1420,7 +1424,7 @@ def close_serialport():
     except SerialException as err:
         log_me("error", "Failed to close the serial port (" + CONFIG.device + ") Line: " + _line())
         log_me("error", err)
-        exit(1)
+        sys.exit(1)
 
 # ----------------------------------------------------------------------------
 
@@ -1638,7 +1642,7 @@ if __name__ == "__main__":
 
     if not LOGGER:
         log_me("error", "Cannot find configuration file (%s)" % CMDARG.configfile)
-        exit(1)
+        sys.exit(1)
 
     log_me("debug", "Python version: %s.%s.%s" % sys.version_info[:3])
     log_me("debug", "RFXCMD Version: " + __version__)
@@ -1691,18 +1695,18 @@ if __name__ == "__main__":
             if os.path.exists(CMDARG.pidfile):
                 log_me("info", "PID file '" + CMDARG.pidfile + "' already exists. Exiting.")
                 log_me("debug", "PID file '" + CMDARG.pidfile + "' already exists.")
-                exit(1)
+                sys.exit(1)
             else:
                 log_me("debug", "PID file does not exists")
 
         else:
             log_me("error", "Command argument --pidfile missing. Line: " + _line())
-            exit(1)
+            sys.exit(1)
 
         log_me("debug", "Check platform")
         if sys.platform == 'win32':
             log_me("error", "Daemonize not supported under Windows. Line: " + _line())
-            exit(1)
+            sys.exit(1)
         else:
             log_me("debug", "Platform: " + sys.platform)
 
@@ -1714,7 +1718,8 @@ if __name__ == "__main__":
             except IOError as err:
                 log_me("error", "Line: " + _line())
                 log_me("error", "Unable to write PID file: %s [%d]" % (err.strerror, err.errno))
-                raise SystemExit("Unable to write PID file: %s [%d]" % (err.strerror, err.errno))
+                raise SystemExit("Unable to write PID file: %s [%d]" % (err.strerror, err.errno)) \
+                    from err
 
             log_me("debug", "Deactivate screen printouts")
             CMDARG.printout_complete = False
@@ -1745,7 +1750,7 @@ if __name__ == "__main__":
         option_send()
 
     log_me("debug", "Exit 0")
-    exit(0)
+    sys.exit(0)
 
 # ------------------------------------------------------------------------------
 # END
