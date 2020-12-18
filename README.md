@@ -1,6 +1,6 @@
 # rfxcmd
 
-[![Build Status](https://travis-ci.org/nbeguier/rfxcmd.svg?branch=master)](https://travis-ci.org/nbeguier/rfxcmd) [![Python 3.4|3.9](https://img.shields.io/badge/python-3.4|3.9-green.svg)](https://www.python.org/) [![License](https://img.shields.io/badge/Licence-GPLv3-blue.svg)](https://github.com/nbeguier/rfxcmd/blob/master/doc/COPYING)
+[![Build Status](https://travis-ci.com/nbeguier/rfxcmd.svg?branch=master)](https://travis-ci.com/nbeguier/rfxcmd) [![Python 3.4|3.9](https://img.shields.io/badge/python-3.4|3.9-green.svg)](https://www.python.org/) [![License](https://img.shields.io/badge/Licence-GPLv3-blue.svg)](https://github.com/nbeguier/rfxcmd/blob/master/doc/COPYING)
 
 DESCRIPTION
 
