@@ -6,7 +6,7 @@ RFX Protocols
 Based on Sebastian Sjoholm work https://github.com/ssjoholm/rfxcmd_gc
 Copyright 2012-2014 Sebastian Sjoholm, sebastian.sjoholm@gmail.com
 Licensed under the GNU General Public License, Version 3.0
-Copyright 2018-2020 by Nicolas BEGUIER, nicolas_beguier@hotmail.com
+Copyright 2018-2021 by Nicolas BEGUIER, nicolas_beguier@hotmail.com
 
 #
 #   NOTES
